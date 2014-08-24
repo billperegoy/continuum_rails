@@ -1,11 +1,2 @@
 %h1 New Project
-
-= form_for @project do |f|
-  %p
-    =  f.label :name 
-    =  f.text_field :name
-  %p
-    =  f.label :path 
-    =  f.text_field :path
-  %p
-    = f.submit
+= render :partial => "projects/form"
