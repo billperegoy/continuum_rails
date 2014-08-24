@@ -1,0 +1,21 @@
+%h1 Project List
+
+%div.col-md-4
+  - if flash[:notice]
+    .div.notice.alert.alert-success.alert-dismissible
+      %button.close{:type => "button", "data-dismiss" => "alert"}
+        %span{"aria-hidden" => "true"}
+          &times;
+      = flash[:notice]
+
+
+  %ul
+    - @projects.each do |project|
+      %li
+        = link_to "#{project.name}", edit_project_path(project) 
+  = link_to "New Project", new_project_path
+
+%div.col-md-4 
+  Column 2
+%div.col-md-4 
+  Column 3
