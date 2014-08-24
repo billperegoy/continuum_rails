@@ -12,15 +12,13 @@
     - @projects.each do |project|
       %tr
         %td
-          = link_to "#{project.name}", edit_project_path(project) 
+          = link_to "#{project.name}", edit_project_path(project), :remote => true
   = link_to "New Project", new_project_path
 
 .col-md-4 
   %p Column 2
-  %button.btn.btn-primary.btn-large{:onclick => "fill_it()"}Show modal
 
 .col-md-4 
-
   Column 3
   #new-project-modal.modal.fade
     .modal-dialog

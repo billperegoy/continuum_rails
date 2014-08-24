@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  respond_to :html, :js
   def index
     @projects = Project.all
   end
@@ -29,6 +30,10 @@ class ProjectsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def show
+    @project = Project.find(params[:id])
   end
 
   private
