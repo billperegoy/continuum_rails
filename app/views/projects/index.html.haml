@@ -1,21 +1,32 @@
 %h1 Project List
 
-%div.col-md-4
+.col-md-4
   - if flash[:notice]
-    .div.notice.alert.alert-success.alert-dismissible
+    .notice.alert.alert-success.alert-dismissible
       %button.close{:type => "button", "data-dismiss" => "alert"}
-        %span{"aria-hidden" => "true"}
-          &times;
+        %span{"aria-hidden" => "true"} &times;
       = flash[:notice]
 
 
-  %ul
+  %table.table-striped.table-bordered.project-table
     - @projects.each do |project|
-      %li
-        = link_to "#{project.name}", edit_project_path(project) 
+      %tr
+        %td
+          = link_to "#{project.name}", edit_project_path(project) 
   = link_to "New Project", new_project_path
 
-%div.col-md-4 
-  Column 2
-%div.col-md-4 
+.col-md-4 
+  %p Column 2
+  %button.btn.btn-primary.btn-large{:onclick => "fill_it()"}Show modal
+
+.col-md-4 
+
   Column 3
+  #new-project-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %a.close{"data-dismiss" => "modal"} &times;
+          %h6 This is a header
+        .modal-body#project-modal-content
+          %p Model body.
