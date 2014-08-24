@@ -12,7 +12,7 @@
     - @projects.each do |project|
       %tr
         %td
-          = link_to "#{project.name}", edit_project_path(project), :remote => true
+          = render :partial => 'projects/project', :locals => {project: project}
   = link_to "New Project", new_project_path
 
 .col-md-4 
