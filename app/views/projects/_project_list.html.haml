@@ -1,0 +1,13 @@
+- if flash[:notice]
+  .notice.alert.alert-success.alert-dismissible
+    %button.close{:type => "button", "data-dismiss" => "alert"}
+      %span{"aria-hidden" => "true"} &times;
+    = flash[:notice]
+
+
+= link_to "New", new_project_path, :class => "btn btn-primary btn-sm", :id => "new-project-button", :remote => true
+%table.table-striped.table-bordered.project-table
+  - @projects.each do |project|
+    %tr
+      %td
+        = render :partial => 'projects/project', :locals => {project: project}
