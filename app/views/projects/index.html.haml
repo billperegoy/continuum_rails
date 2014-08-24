@@ -8,23 +8,18 @@
       = flash[:notice]
 
 
+  = link_to "New", new_project_path, :class => "btn btn-primary btn-sm", :id => "new-project-button", :remote => true
   %table.table-striped.table-bordered.project-table
     - @projects.each do |project|
       %tr
         %td
           = render :partial => 'projects/project', :locals => {project: project}
-  = link_to "New Project", new_project_path
 
 .col-md-4 
   %p Column 2
 
 .col-md-4 
   Column 3
-  #new-project-modal.modal.fade
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %a.close{"data-dismiss" => "modal"} &times;
-          %h6 This is a header
-        .modal-body#project-modal-content
-          %p Model body.
+
+/ Render the modal box used for new/edit. It will be hidden by default
+= render :partial => 'projects/form_modal'
