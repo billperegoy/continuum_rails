@@ -10,11 +10,13 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    if @project.save
-      redirect_to projects_path, notice:
-        "Project #{@project.name} successfully created!"
-    else
-      render :new
+    respond_to do |format|
+      if @project.save
+        @projects = Project.all
+        format.js {}
+      else
+        render :new
+      end
     end
   end
 
@@ -24,11 +26,13 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project.update(project_params)
-      redirect_to projects_path, notice:
-        "Project #{@project.name} successfully updated!"
-    else
-      render :edit
+    respond_to do |format|
+      if @project.update(project_params)
+        @projects = Project.all
+        format.js {}
+      else
+        render :edit
+      end
     end
   end
 
