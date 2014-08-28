@@ -1,1 +1,10 @@
-= link_to "#{project.name}", edit_project_path(project), :remote => true
+.panel.panel-default
+  .panel-heading
+    %h4.panel-title
+    %a{"data-toggle" => "collapse", "data-parent" => "#accordion",  :href => "#collapse-#{project.id}"}
+      = "#{project.name}" 
+    = link_to "{edit}", edit_project_path(project), :remote => true
+  .panel-collapse.collapse{:id => "collapse-#{project.id}"}
+    .panel-body
+      = "#{project.path}" 
+
