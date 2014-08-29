@@ -1,6 +1,7 @@
 ContinuumRails::Application.routes.draw do
   root 'projects#index'
 
-  resources :stages
-  resources :projects
+  resources :projects do
+    resources :stages
+  end
 end
