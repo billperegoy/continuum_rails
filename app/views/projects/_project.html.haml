@@ -4,6 +4,7 @@
     %a{"data-toggle" => "collapse", "data-parent" => "#accordion",  :href => "#collapse-#{project.id}"}
       = "#{project.name}" 
     = link_to "{edit}", edit_project_path(project), :remote => true
+    = link_to '{delete}', project, :method => :delete, :data => { confirm: 'Are you sure?' }, :remote => true
   .panel-collapse.collapse{:id => "collapse-#{project.id}"}
     .panel-body
       = "#{project.path}" 

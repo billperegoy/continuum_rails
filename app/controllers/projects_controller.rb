@@ -40,6 +40,14 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def destroy
+    respond_to do |format|
+      @project = Project.delete(params[:id])
+      @projects = Project.all
+      format.js {}
+    end
+  end
+
   private
   def project_params
     params.require(:project).permit(:name, :path)
