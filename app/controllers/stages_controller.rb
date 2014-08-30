@@ -1,4 +1,9 @@
 class StagesController < ApplicationController
+  def index
+    @project = Project.find(params[:project_id])
+    @stages = @project.stages.all
+  end
+
   def new
     @project = Project.find(params[:project_id])
     @stage = @project.stages.new

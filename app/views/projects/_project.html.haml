@@ -8,5 +8,6 @@
     = link_to '{new statge}', new_project_stage_path(project)
   .panel-collapse.collapse{:id => "collapse-#{project.id}"}
     .panel-body
-      = "#{project.path}" 
+      / = "#{project.path}" 
+      = render :partial => 'stages/index', :locals => {project: project}
 
