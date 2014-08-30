@@ -5,6 +5,7 @@
       = "#{project.name}" 
     = link_to "{edit}", edit_project_path(project), :remote => true
     = link_to '{delete}', project, :method => :delete, :data => { confirm: 'Are you sure?' }, :remote => true
+    = link_to '{new statge}', new_project_stage_path(project)
   .panel-collapse.collapse{:id => "collapse-#{project.id}"}
     .panel-body
       = "#{project.path}" 

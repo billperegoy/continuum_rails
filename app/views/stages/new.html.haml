@@ -1,0 +1,13 @@
+%h1 New Stage for Project #{@project.name}
+= form_for [@project, @stage] do |f|
+  %p
+    =  f.label :name 
+    =  f.text_field :name
+  %p
+    =  f.label :level 
+    =  f.number_field :level
+  %p
+    =  f.label :command 
+    =  f.text_field :command
+  %p
+    = f.submit
