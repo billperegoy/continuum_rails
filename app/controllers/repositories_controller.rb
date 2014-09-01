@@ -16,7 +16,7 @@ class RepositoriesController < ApplicationController
     repository = Repository.new
     render :nothing => true
     #body = request.body.read.truncate(32)
-    body = JSON.parse(request.body);
+    body = JSON.parse(request.body.read);
     create_new_release(body['after'])
   end
 
