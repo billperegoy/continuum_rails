@@ -16,16 +16,29 @@ class RepositoriesController < ApplicationController
     repository = Repository.new
     render :nothing => true
     body = JSON.parse(request.body.read);
-    project_name = body['repository']['name']
-    git_hash = body['head_commit']['id']
-    create_new_release(project_name, git_hash)
+
+    release_fields = {
+      project_name: body['repository']['name'],
+      repository: body['repository']['full_name'],
+      git_id: body['head_commit']['id'],
+      commit_message: body['head_commit']['message'],
+      commit_timestamp: Date.parse(body['head_commit']['timestamp']),
+      committer_name: body['head_commit']['committer']['name']
+    }
+
+    create_new_release(release_fields)
   end
 
   private
-  def create_new_release(project_name, git_hash)
+  def create_new_release(fields)
     project = Project.find_by(name: project_name)
     if project
-      Release.create(git_id: git_hash, project_id: project.id)
+      Release.create(project_id: project.id,
+                     git_id: fields[:git_id],
+                     commit_message: fields[:commit_message],
+                     commit_timestamp: fields[:commit_timestamp],
+                     committer_name: fields[:committer_name]
+                    )
     end
   end
 end
