@@ -14,15 +14,16 @@ class RepositoriesController < ApplicationController
   #
   def create
     repository = Repository.new(repository_params)
-    render :nothing => true
+    #render :nothing => true
     create_new_release(repository)
+    #render text: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
+    render text: "Got a POST request"
   end
 
   private
   def create_new_release(repository)
     id = "hello2"
     release = Release.create(git_id: id, project_id: 1)
-    render text: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
     #project = Project.find_by(name: repository.project)
     #if project
     #  release = Release.create(git_id: repository.git_hash, project_id: project.id)
