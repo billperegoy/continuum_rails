@@ -1,28 +1,64 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an overview of the models and interactions between them. I'm hoping that
+writing this down will bring clarity. The biggest issue is what the role of the 
+Scheduler model is and how and what it interacts with.
 
-Things you may want to cover:
+* Project
+This reprsents a single project to be verified.
+It has many Stages and Releases.
 
-* Ruby version
+* Stage
+This represents a single stage of the verification process.
+A stage performs a certain level of testing. The lower the 
+level number, the smaller the testing is (in general).
+(belongs to Project, Regression)
 
-* System dependencies
+* Release
+This regresents a single 'git release' of a design. This represents
+a single snapshot of a project that is to have tests run on it.
+(belongs to Project, Regression)
 
-* Configuration
+* Regression
+This represents a single test to be run. It is assocaited with a 
+particular Stage and Release. It runs the tests described in the Stage
+on the release represented by the Release.
+(has 1 of each: Stage and Release)
 
-* Database creation
+* Scheduler
+This seems to be the "God model" that pulls it all together but I'm having
+trouble understanding how it fits together. I'm hoping that trying to describe 
+how it is used here will clarify it.
 
-* Database initialization
+The Scheduler contains many Projects. Here is some code that would set up the 
+whole thing.
 
-* How to run the test suite
+# Build the single master scheduler and give it a single project
+# with a single stage (level 0)
+#
+scheduler = Scheduler.create
+project_1 = Scheduler.projects.create(name: 'proj_1')
+stage_0 = project_1.stages.create(level: 0) 
 
-* Services (job queues, cache servers, search engines, etc.)
+# The idea here is that when someone checks in a new change to github,
+# this triggers the creation of a release and that release notice gets
+# transmitted to the Scheduler.
+#
+release = project_1.releases.create(git_id: 'git_hash')
+scheduler.register_release(release)
 
-* Deployment instructions
+# The act of creating a release should kick off the Scheduler process
+# as follows:
+class Scheduler 
+  def register_release(release)
+    # First, look at the release and look for the Stage 0 
+    # for this project.
+    stage = release.project.stages.find(level: 0)
+    regression = self.regressions.create(stage_id: stage.id, release_id: release.id)
+    regression.run
+  end
+end
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+# This will get the level 0 regression running. However, the scheduler needs to
+# know when the regression is complete and kick up subsequent levels of regressions.
+# I still need to figure out how this communication/callback procedure will work.

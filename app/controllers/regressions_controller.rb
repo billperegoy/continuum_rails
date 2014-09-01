@@ -1,0 +1,2 @@
+class RegressionsController < ApplicationController
+end

@@ -11,11 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823212121) do
+ActiveRecord::Schema.define(version: 20140831221319) do
 
   create_table "projects", force: true do |t|
     t.string   "name"
     t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regressions", force: true do |t|
+    t.string   "name"
+    t.integer  "stage_id"
+    t.integer  "release_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "scheduler_id"
+  end
+
+  add_index "regressions", ["release_id"], name: "index_regressions_on_release_id"
+  add_index "regressions", ["scheduler_id"], name: "index_regressions_on_scheduler_id"
+  add_index "regressions", ["stage_id"], name: "index_regressions_on_stage_id"
+
+  create_table "releases", force: true do |t|
+    t.string   "git_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "releases", ["project_id"], name: "index_releases_on_project_id"
+
+  create_table "repositories", force: true do |t|
+    t.string   "project"
+    t.string   "git_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "schedulers", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
