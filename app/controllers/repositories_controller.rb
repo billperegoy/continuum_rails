@@ -13,24 +13,16 @@ class RepositoriesController < ApplicationController
   # We need to look up the ID here.
   #
   def create
-    repository = Repository.new(repository_params)
-    #render :nothing => true
-    create_new_release(repository)
-    #render text: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
-    render text: "Got a POST request"
+    repository = Repository.new
+    render :nothing => true
+    body = request.body.read
+    create_new_release(body)
   end
 
   private
-  def create_new_release(repository)
-    id = "hello2"
+  def create_new_release(body)
+    id = "hello3"
     release = Release.create(git_id: id, project_id: 1)
-    #project = Project.find_by(name: repository.project)
-    #if project
-    #  release = Release.create(git_id: repository.git_hash, project_id: project.id)
-    #end 
-  end
-
-  def repository_params
-    params.permit(:project, :git_hash)
+    release = Release.create(git_id: body, project_id: 1)
   end
 end
