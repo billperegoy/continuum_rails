@@ -13,10 +13,10 @@ class RepositoriesController < ApplicationController
   # We need to look up the ID here.
   #
   def create
-    repository = Repository.new
     render :nothing => true
     body = JSON.parse(request.body.read);
 
+    # FIXME - This doesn't properly parse the time portion of the DateTime field
     release_fields = {
       project_name: body['repository']['name'],
       repository: body['repository']['full_name'],
