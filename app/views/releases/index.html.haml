@@ -1,5 +1,6 @@
 %h1 Releases 
 
-- @releases.each do |release|
-  = Release #{release}
+%ul
+  - @releases.each do |release|
+    %li Release #{release.git_id}
 
