@@ -20,8 +20,9 @@ class RepositoriesController < ApplicationController
 
   private
   def create_new_release(repository)
-    id = "#{request.body.read}"
+    id = "hello2"
     release = Release.create(git_id: id, project_id: 1)
+    render text: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
     #project = Project.find_by(name: repository.project)
     #if project
     #  release = Release.create(git_id: repository.git_hash, project_id: project.id)
