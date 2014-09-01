@@ -15,7 +15,7 @@ class RepositoriesController < ApplicationController
   def create
     repository = Repository.new
     render :nothing => true
-    body = truncate(request.body.read, length: 32)
+    body = request.body.read.truncate(32)
     create_new_release(body)
   end
 
