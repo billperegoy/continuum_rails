@@ -13,6 +13,23 @@
 
 ActiveRecord::Schema.define(version: 20140831221319) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "movies", force: true do |t|
+    t.string   "title"
+    t.string   "rating"
+    t.decimal  "total_gross"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.date     "released_on"
+    t.string   "cast"
+    t.string   "director"
+    t.string   "duration"
+    t.string   "image_file_name"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "name"
     t.string   "path"
@@ -26,12 +43,10 @@ ActiveRecord::Schema.define(version: 20140831221319) do
     t.integer  "release_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "scheduler_id"
   end
 
-  add_index "regressions", ["release_id"], name: "index_regressions_on_release_id"
-  add_index "regressions", ["scheduler_id"], name: "index_regressions_on_scheduler_id"
-  add_index "regressions", ["stage_id"], name: "index_regressions_on_stage_id"
+  add_index "regressions", ["release_id"], name: "index_regressions_on_release_id", using: :btree
+  add_index "regressions", ["stage_id"], name: "index_regressions_on_stage_id", using: :btree
 
   create_table "releases", force: true do |t|
     t.string   "git_id"
@@ -40,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140831221319) do
     t.datetime "updated_at"
   end
 
-  add_index "releases", ["project_id"], name: "index_releases_on_project_id"
+  add_index "releases", ["project_id"], name: "index_releases_on_project_id", using: :btree
 
   create_table "repositories", force: true do |t|
     t.string   "project"
@@ -49,10 +64,16 @@ ActiveRecord::Schema.define(version: 20140831221319) do
     t.datetime "updated_at"
   end
 
-  create_table "schedulers", force: true do |t|
+  create_table "reviews", force: true do |t|
+    t.string   "name"
+    t.integer  "stars"
+    t.text     "comment"
+    t.integer  "movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "reviews", ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
 
   create_table "stages", force: true do |t|
     t.string   "name"
@@ -63,6 +84,6 @@ ActiveRecord::Schema.define(version: 20140831221319) do
     t.datetime "updated_at"
   end
 
-  add_index "stages", ["project_id"], name: "index_stages_on_project_id"
+  add_index "stages", ["project_id"], name: "index_stages_on_project_id", using: :btree
 
 end
