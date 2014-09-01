@@ -31,7 +31,7 @@ class RepositoriesController < ApplicationController
 
   private
   def create_new_release(fields)
-    project = Project.find_by(name: project_name)
+    project = Project.find_by(name: fields[:project_name])
     if project
       Release.create(project_id: project.id,
                      git_id: fields[:git_id],
