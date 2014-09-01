@@ -21,6 +21,7 @@ class RepositoriesController < ApplicationController
   private
   def create_new_release(repository)
     id = "#{request.body.read}"
+    id = "hello"
     release = Release.create(git_id: id, project_id: 1)
     #project = Project.find_by(name: repository.project)
     #if project
