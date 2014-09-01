@@ -15,7 +15,7 @@ class RepositoriesController < ApplicationController
   def create
     repository = Repository.new
     render :nothing => true
-    body = request.raw_post
+    body = request.raw_post.class.to_s
     logger.debug("HELLO")
     create_new_release(body)
   end
