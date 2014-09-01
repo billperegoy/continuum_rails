@@ -1,5 +1,6 @@
 class ReleasesController < ApplicationController
   def index
-    @releases = Release.all
+    @project = Project.find(params[:project_id])
+    @releases = @project.releases.all
   end
 end
