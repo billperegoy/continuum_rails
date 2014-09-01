@@ -17,6 +17,8 @@ class RepositoriesController < ApplicationController
     render :nothing => true
     body = request.raw_post.class.to_s
     body = request.body.read.class.to_s
+    body_json = JSON.parse(body)
+    body = body_json.class
     create_new_release(body)
   end
 
