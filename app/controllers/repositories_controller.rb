@@ -15,15 +15,15 @@ class RepositoriesController < ApplicationController
   def create
     repository = Repository.new
     render :nothing => true
-    #body = request.body.read.truncate(32)
     body = JSON.parse(request.body.read);
-    create_new_release(body['after'])
+    repository = body['repository']['name']
+    git_hash = body['head_commit']['id']
+    create_new_release(repository, git_hash)
   end
 
   private
-  def create_new_release(body)
-    id = "hello3"
-    release = Release.create(git_id: id, project_id: 1)
-    release = Release.create(git_id: body, project_id: 1)
+  def create_new_release(repository, git_hash)
+    Release.create(git_id: repository, project_id: 1)
+    Release.create(git_id: git_hash, project_id: 1)
   end
 end
