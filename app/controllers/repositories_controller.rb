@@ -20,7 +20,8 @@ class RepositoriesController < ApplicationController
 
   private
   def create_new_release(repository)
-    release = Release.create(git_id: "asdf", project_id: 1)
+    id = request.body.read
+    release = Release.create(git_id: id, project_id: 1)
     #project = Project.find_by(name: repository.project)
     #if project
     #  release = Release.create(git_id: repository.git_hash, project_id: project.id)
