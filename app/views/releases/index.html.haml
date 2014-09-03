@@ -3,8 +3,4 @@
 %ul
   - @releases.each do |release|
     %li 
-      %p ID: #{release.git_id}
-      %p MSG: #{release.commit_message}
-      %p TIMESTAMP: #{release.commit_timestamp}
-      %p NAME: #{release.committer_name}
-
+      = link_to "#{release.git_id}", project_release_path(@project, release)
