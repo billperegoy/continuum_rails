@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
         format.js {}
       else
         render :new
+        format.js {}
       end
     end
   end

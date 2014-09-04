@@ -11,6 +11,8 @@ gem 'pg'
 gem 'rails_12factor'
 gem 'unicorn'
 
+gem "github_api"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass'
