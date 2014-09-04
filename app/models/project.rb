@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :path, presence: true, uniqueness: true
+  validates :path, format: { with: /\A\w+\/\w+\z/,
+    message: 'must be <repos>/<proj>' }
   validate :path_must_exist_as_github_project
 
   def path_must_exist_as_github_project
