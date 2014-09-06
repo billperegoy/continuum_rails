@@ -29,6 +29,9 @@ class RepositoriesController < ApplicationController
     create_new_release(release_fields)
   end
 
+  def auth
+  end
+
   private
   def create_new_release(fields)
     project = Project.find_by(path: fields[:repository])

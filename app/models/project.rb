@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
     return false
   end
 
+  # https://github.com/login/oauth/authorize?client_id=4614cd3accaefacf4694&redirect_uri=http://sheep9.herokuapp.com/repositories/auth
   def can_create_github_hook
     # This should create the hook and return true.
     # If hook creation fails, return false.
