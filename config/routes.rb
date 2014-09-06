@@ -1,7 +1,9 @@
 ContinuumRails::Application.routes.draw do
   root 'projects#index'
 
-  get '/repositories/auth', to: 'repositories#auth'
+  get '/projects/auth', to: 'projects#auth'
+  get '/projects/auth_redirect', to: 'projects#auth_redirect'
+
   resources :repositories
   resources :regressions
 
@@ -9,5 +11,4 @@ ContinuumRails::Application.routes.draw do
     resources :stages
     resources :releases
   end
-
 end
