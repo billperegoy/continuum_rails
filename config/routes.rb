@@ -1,8 +1,8 @@
 ContinuumRails::Application.routes.draw do
   root 'projects#index'
 
-  get '/projects/auth', to: 'projects#auth'
-  get '/projects/auth_redirect', to: 'projects#auth_redirect'
+  get '/github/auth', to: 'github#auth'
+  get '/github/auth_redirect', to: 'github#auth_redirect'
 
   resources :repositories
   resources :regressions
