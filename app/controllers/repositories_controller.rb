@@ -30,6 +30,7 @@ class RepositoriesController < ApplicationController
   end
 
   def auth
+    @code = params[:code]
   end
 
   private
