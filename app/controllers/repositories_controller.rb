@@ -31,6 +31,7 @@ class RepositoriesController < ApplicationController
 
   def auth
     @code = params[:code]
+    logger.debug "Inside redirect code #{@code}"
   end
 
   private

@@ -30,8 +30,11 @@ class Project < ActiveRecord::Base
     client_id = '4614cd3accaefacf4694'
     client_secret = '5dff49f531f6fecdaec3945ab7c5e94b115211b2'
 
+    logger.debug "About to initialize Github"
     github = Github.new(client_id: client_id, client_secret: client_secret)
+    logger.debug "Done innitializing Github"
     github.authorize_url
+    logger.debug "Done authorizing Github"
 
     found_errors = false
     if found_errors 
