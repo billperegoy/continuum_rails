@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
     #
     client_id = '4614cd3accaefacf4694'
     client_secret = '5dff49f531f6fecdaec3945ab7c5e94b115211b2'
-    callback_uri = 'http://sheep9.herokuapps.com/repositories/auth'
+    callback_uri = 'http://sheep9.herokuapp.com/repositories/auth'
 
     github = Github.new(client_id: client_id, client_secret: client_secret)
     #github.authorize_url(redirect_uri: callback_uri, scope: 'repo')
