@@ -61,7 +61,8 @@ class ProjectsController < ApplicationController
 
   def auth_redirect
     @code = params[:code]
-    @token = @github.get_token(@code)
+    # @token = @github.get_token(@code)
+    @token =  "token"
   end
 
   private
