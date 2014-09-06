@@ -54,15 +54,15 @@ class ProjectsController < ApplicationController
 
   # FIXME - This doesn't belong in this controller
   def auth
-    @github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
-    address = @github.authorize_url
+    github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+    address = github.authorize_url
     redirect_to address
   end
 
   def auth_redirect
-    @github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
-    @code = params[:code].to_s
-    @token = @github.get_token(@code)
+    github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+    code = params[:code].to_s
+    @token = github.get_token(code)
   end
 
   private
