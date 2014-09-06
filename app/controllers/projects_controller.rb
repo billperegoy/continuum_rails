@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  CLIENT_ID = '4614cd3accaefacf4694'
+  CLIENT_SECRET = '5dff49f531f6fecdaec3945ab7c5e94b115211b2'
+
   respond_to :html, :js
   def index
     @projects = Project.all
@@ -51,18 +54,15 @@ class ProjectsController < ApplicationController
 
   # FIXME - This doesn't belong in this controller
   def auth
-    client_id = '4614cd3accaefacf4694'
-    client_secret = '5dff49f531f6fecdaec3945ab7c5e94b115211b2'
-
-    @github = Github.new(client_id: client_id, client_secret: client_secret)
+    @github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     address = @github.authorize_url
     redirect_to address
   end
 
   def auth_redirect
-    @code = params[:code]
-    # @token = @github.get_token(@code)
-    @token =  "token"
+    @github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+    @code = params[:code].to_s
+    @token = @github.get_token(@code)
   end
 
   private
