@@ -15,12 +15,13 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
-        github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
-        address = github.authorize_url
-        redirect_to address
-        #format.html {}
-        #@projects = Project.all
-        #format.js {}
+        # FIXME - I want to add the githubhook here but can't make it work.
+        # github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+        # address = github.authorize_url
+        # redirect_to address
+        format.html {}
+        @projects = Project.all
+        format.js {}
       else
         render :new
         #format.js {}
@@ -69,9 +70,11 @@ class ProjectsController < ApplicationController
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     @code = params[:code].to_s
     @token = github.get_token(@code).token
-    response =  RestClient.get("https://api.github.com/users/billperegoy/repos?access_token=#{@token}")
+    # response =  RestClient.get("https://api.github.com/users/billperegoy/repos?access_token=#{@token}")
+
+    # curl -usigmavirus24 -v -H "Content-Type: application/json" -X POST -d '{"name": "cia", "active": true, "events": ["push"], "config": {"url": "...", "content_type": "json"}}' https://api.github.com/repos/sigmavirus24/reponame/hooks
     response =  RestClient.get("https://api.github.com/repos/billperegoy/test/hooks?access_token=#{@token}")
-    @data = JSON.parse(response)
+    # @data = JSON.parse(response)
     #@projects = Project.all
     #format.js {}
   end
