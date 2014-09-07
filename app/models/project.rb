@@ -2,7 +2,6 @@ class Project < ActiveRecord::Base
   has_many :stages
   has_many :releases
 
-  validates :name, presence: true, uniqueness: true
   validates :path, presence: true, uniqueness: true
   validates :path, format: { with: /\A\w+\/\w+\z/,
     message: 'must be <repos>/<proj>' }
