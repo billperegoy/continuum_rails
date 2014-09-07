@@ -18,8 +18,8 @@ class ProjectsController < ApplicationController
         github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
         address = github.authorize_url
         redirect_to address
-        @projects = Project.all
-        format.js {}
+        #@projects = Project.all
+        #format.js {}
       else
         render :new
         format.js {}
