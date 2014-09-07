@@ -13,19 +13,19 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    respond_to do |format|
+    #respond_to do |format|
       if @project.save
         github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
         address = github.authorize_url
         redirect_to address
-        format.html {}
+        #format.html {}
         #@projects = Project.all
         #format.js {}
       else
         render :new
-        format.js {}
+        #format.js {}
       end
-    end
+    #end
   end
 
   def edit
