@@ -12,6 +12,7 @@ gem 'rails_12factor'
 gem 'unicorn'
 
 gem "github_api"
+gem "rest-client"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

@@ -69,8 +69,8 @@ class ProjectsController < ApplicationController
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     @code = params[:code].to_s
     @token = github.get_token(@code)
-    github = Github.new(client_id: CLIENT_ID, oauth_token: @token.token, client_secret: CLIENT_SECRET)
-    @hooks = github.repos.hooks.list(user: 'billperegoy', repo: 'BowlingGame')
+    response =  RestClient.get("https://api.github.com/repos/billperegoy/BowlingGame/hooks?access_token=#{@token}")
+    @data = JSON.parse(response)
     #@projects = Project.all
     #format.js {}
   end
