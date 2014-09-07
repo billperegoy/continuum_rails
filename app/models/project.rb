@@ -7,7 +7,6 @@ class Project < ActiveRecord::Base
   validates :path, format: { with: /\A\w+\/\w+\z/,
     message: 'must be <repos>/<proj>' }
   validate :path_must_exist_as_github_project
-  validate :can_create_github_hook
 
   def path_must_exist_as_github_project
     github = Github.new
@@ -23,15 +22,5 @@ class Project < ActiveRecord::Base
       return true if elem.full_name == path
     end
     return false
-  end
-
-  # https://github.com/login/oauth/authorize?client_id=4614cd3accaefacf4694
-  def can_create_github_hook
-    # FIXME - need to use the github controller somehow.
-
-    found_errors = false
-    if found_errors 
-      errors.add(:path, 'Could not authorize with github')
-    end
   end
 end

@@ -15,16 +15,11 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
-        # FIXME - I want to add the githubhook here but can't make it work.
-        # github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
-        # address = github.authorize_url
-        # redirect_to address
-        format.html {}
         @projects = Project.all
         format.js {}
       else
         render :new
-        #format.js {}
+        format.js {}
       end
     end
   end
