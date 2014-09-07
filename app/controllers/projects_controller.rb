@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    #respond_to do |format|
+    respond_to do |format|
       if @project.save
         github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
         address = github.authorize_url
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
         render :new
         #format.js {}
       end
-    #end
+    end
   end
 
   def edit
@@ -69,7 +69,7 @@ class ProjectsController < ApplicationController
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     @code = params[:code].to_s
     @token = github.get_token(@code)
-    @hooks = github.repos.hooks.list(user: 'billperegoy', repo: 'BowlingGame')
+    @hooks = github.repos.hooks.list(user: 'billperegoy', token: @token.token repo: 'BowlingGame')
     #@projects = Project.all
     #format.js {}
   end
