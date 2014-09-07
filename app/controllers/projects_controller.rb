@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
     @code = params[:code].to_s
     @token = github.get_token(@code).token
     #response =  RestClient.get("https://api.github.com/repos/billperegoy/BowlingGame/hooks?access_token=#{@token}")
-    response =  RestClient.get("https://api.github.com/billperegoy/repos?access_token=#{@token}")
+    response =  RestClient.get("https://api.github.com/users/billperegoy/repos?access_token=#{@token}")
     @data = JSON.parse(response)
     #@projects = Project.all
     #format.js {}
