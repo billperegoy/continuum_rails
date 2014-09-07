@@ -69,6 +69,7 @@ class ProjectsController < ApplicationController
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     @code = params[:code].to_s
     @token = github.get_token(@code)
+    @hooks = github.repos.hooks.list(user: 'billperegoy', repo: 'BowlingGame')
     #@projects = Project.all
     #format.js {}
   end
