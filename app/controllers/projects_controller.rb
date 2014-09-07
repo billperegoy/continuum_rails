@@ -59,15 +59,17 @@ class ProjectsController < ApplicationController
   def auth
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     address = github.authorize_url
+    logger.debug "About to redirect to github"
     redirect_to address
   end
 
   def auth_redirect
+    logger.debug "Back from redirect"
     github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     @code = params[:code].to_s
     @token = github.get_token(@code)
-    @projects = Project.all
-    format.js {}
+    #@projects = Project.all
+    #format.js {}
   end
 
   private
