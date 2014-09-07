@@ -15,6 +15,9 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
+        github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+        address = github.authorize_url
+        redirect_to address
         @projects = Project.all
         format.js {}
       else
@@ -50,6 +53,21 @@ class ProjectsController < ApplicationController
       @projects = Project.all
       format.js {}
     end
+  end
+
+  # FIXME - This is not being used right now
+  def auth
+    github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+    address = github.authorize_url
+    redirect_to address
+  end
+
+  def auth_redirect
+    github = Github.new(client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
+    @code = params[:code].to_s
+    @token = github.get_token(@code)
+    @projects = Project.all
+    format.js {}
   end
 
   private
