@@ -15,7 +15,7 @@ class StagesController < ApplicationController
     if @stage.save
       redirect_to :projects
     else
-      render :stage
+      render :new
     end
   end
 
